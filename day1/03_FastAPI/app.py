@@ -39,6 +39,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# --- 開発者名設定 ---
+DEVELOPER = "RiiChoco"
+
+# --- 開発者名クラス ---
+class Developer:
+    def __init__(self, developer=DEVELOPER):
+        self.DEVELOPER = developer
+
+developer = Developer(DEVELOPER)
+
 # --- データモデル定義 ---
 class Message(BaseModel):
     role: str
@@ -153,6 +163,15 @@ async def health_check():
         return {"status": "error", "message": "No model loaded"}
 
     return {"status": "ok", "model": config.MODEL_NAME}
+
+@app.get("/developer")
+async def developer_check():
+    """ヘルスチェックエンドポイント"""
+    global developer
+    if developer is None:
+        return {"status": "error", "message": "No find developer"}
+
+    return {"status": "ok", "developer": developer.DEVELOPER}
 
 # 簡略化されたエンドポイント
 @app.post("/generate", response_model=GenerationResponse)

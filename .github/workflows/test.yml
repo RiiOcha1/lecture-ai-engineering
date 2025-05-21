@@ -39,7 +39,12 @@ jobs:
     # - name: Run model tests
     #   run: |
     #     pytest day5/演習2/tests/test_model.py -v
-    
+
+    - name: Download Titanic dataset
+      run: |
+        mkdir -p day5/演習2/data
+        curl -L https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv -o day5/演習2/data/Titanic.csv
+
     - name: Run pytest on main.py
       run: |
         pytest day5/演習2/main.py -v

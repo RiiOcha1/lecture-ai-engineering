@@ -11,11 +11,12 @@ import pickle
 import time
 import great_expectations as gx
 
+
 class DataLoader:
     """データロードを行うクラス"""
 
     @staticmethod
-    def load_titanic_data(path=None):
+    def load_titanic_data(path="./data/Titanic.csv"):
         """Titanicデータセットを読み込む"""
         if path:
             return pd.read_csv(path)
